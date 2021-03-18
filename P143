@@ -1,0 +1,31 @@
+import React from "react";
+import HomeScreen from "./screens/Home";
+
+export default function App() {
+  return <HomeScreen />;
+}
+npm i react-native-elements@1.2.7
+getArticles = () => {
+    const url = "http://localhost:5000/get-article";
+    axios
+      .get(url)
+      .then(response => {
+        let details = response.data.data;
+        details["duration"] = this.timeConvert(details.duration);
+        this.setState({ movieDetails: details });
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  };
+  render() {
+    const { movieDetails } = this.state;
+    if (movieDetails.poster_link) {
+      const {
+        poster_link,
+        title,
+        release_date,
+        duration,
+        overview,
+        rating
+      } = movieDetails;
